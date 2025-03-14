@@ -87,18 +87,18 @@ st.title("🔥 Emotion Detector")
 st.markdown("### 🤔 Enter a sentence to analyze its emotion")
 user_input = st.text_area("", "", height=150)
 
-def Pre_process(text):
-    text = contractions.fix(text)
-    text = text.lower().strip()
-    text = re.sub(r"[^\w\s]", "", text)  # Remove special characters
-    text = re.sub(r"\s+", " ", text).strip()  # Remove extra spaces
-    words = text.split()
-    words = [lemmatizer.lemmatize(word) for word in words if word not in stop_words]
-    return " ".join(words)
+# def Pre_process(text):
+#     text = contractions.fix(text)
+#     text = text.lower().strip()
+#     text = re.sub(r"[^\w\s]", "", text)  # Remove special characters
+#     text = re.sub(r"\s+", " ", text).strip()  # Remove extra spaces
+#     words = text.split()
+#     words = [lemmatizer.lemmatize(word) for word in words if word not in stop_words]
+#     return " ".join(words)
 
 def predict_emotion(text, temperature):
-    cleaned_text = Pre_process(text)
-    inputs = tokenizer(cleaned_text, return_tensors="pt", padding=True, truncation=True).to(device)
+    # cleaned_text = Pre_process(text)
+    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True).to(device)
     with torch.no_grad():
         logits = model(**inputs)
         probabilities = F.softmax(logits / temperature, dim=1)[0]
