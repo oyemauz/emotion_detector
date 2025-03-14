@@ -2,7 +2,7 @@
   "_name_or_path": "distilbert-base-uncased",
   "activation": "gelu",
   "architectures": [
-    "DistilBertForSequenceClassification"
+    "CustomModel"
   ],
   "attention_dropout": 0.1,
   "dim": 768,
